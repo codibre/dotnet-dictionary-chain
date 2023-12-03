@@ -1,6 +1,6 @@
 {
   "branches": [
-    "master"
+    "main"
   ],
   "plugins": [
     "@semantic-release/commit-analyzer",
@@ -10,5 +10,7 @@
     "@semantic-release/github",
     "@semantic-release/git"
   ],
-  "preset": "angular"
+  "preset": "angular",
+  "npmPublish": false,
+  "projectPath": "DictionaryChain/Codibre.DictionaryChain.csproj"
 }
