@@ -4,5 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageTags>Dictionary;Tree;Chain;constantTime</PackageTags>
   </PropertyGroup>
-
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 </Project>

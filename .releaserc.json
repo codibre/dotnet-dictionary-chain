@@ -12,5 +12,16 @@
   ],
   "preset": "angular",
   "npmPublish": false,
-  "projectPath": "DictionaryChain/Codibre.DictionaryChain.csproj"
+  "projectPath": "DictionaryChain/Codibre.DictionaryChain.csproj",
+  "files": [
+    {
+      "type": "xml",
+      "replacements": [
+        {
+          "key": "VersionPrefix",
+          "value": "${nextRelease.version}"
+        }
+      ]
+    }
+  ]
 }
