@@ -6,6 +6,7 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/changelog",
     "@semantic-release/release-notes-generator",
+    "@droidsolutions-oss/semantic-release-nuget",
     "@semantic-release/github",
     "@semantic-release/git"
   ],
