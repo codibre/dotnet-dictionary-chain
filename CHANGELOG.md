@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.1...v1.0.2) (2023-12-04)
+
+
+### Bug Fixes
+
+* usePackageVersion set to true, for semantic release controlled version ([6eae287](https://github.com/codibre/dotnet-dictionary-chain/commit/6eae287f56231f3fc77e4c77b8c400ffef5e2733))
+
 ## [1.0.1](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.0...v1.0.1) (2023-12-04)
 
 
