@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,5 +26,5 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: dotnet test Test/Test.csproj  /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput="./coverage/lcov.info"
-          coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
+          coverageCommand: sh run-coverage.sh
+          coverageLocations: ${{github.workspace}}/coverage/coverage.cobertura.xml:cobertura
