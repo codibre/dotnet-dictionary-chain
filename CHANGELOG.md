@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.0...v1.0.1) (2023-12-04)
+
+
+### Bug Fixes
+
+* fixing tags for proper release ([b947fd8](https://github.com/codibre/dotnet-dictionary-chain/commit/b947fd8083f6e13b8ad7c9e82999e9061837d260))
+
 # [1.0.0](https://github.com/codibre/dotnet-dictionary-chain/compare/v0.1.0...v1.0.0) (2023-12-04)
 
 
