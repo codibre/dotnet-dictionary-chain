@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Test
 {
     [TestClass]
@@ -322,6 +324,145 @@ namespace Test
                             )
                         )
                     )
+                );
+        }
+        
+        [TestMethod]
+        public void Create_LevelN_Dictionary()
+        {
+            var result = target.ToDictionaryChain(
+                (x) => x.FieldString,
+                (x) => x.FieldInt,
+                (x) => x.FieldBool,
+                (x) => x.FieldBool,
+                (x) => x.FieldBool,
+                (x) => x.FieldBool,
+                (x) => x.FieldBool
+            );
+
+            var list = GetDictList(
+                result,
+                (k0Dict) =>
+                    GetDictList(
+                        k0Dict,
+                        (k1Dict) =>
+                            GetDictList(
+                                k1Dict,
+                                (k2Dict) =>
+                                    GetDictList(
+                                        k2Dict,
+                                        (k3Dict) =>
+                                            GetDictList(
+                                                k3Dict,
+                                                (k3Dict) =>
+                                                    GetDictList(
+                                                        k3Dict,
+                                                        (k3Dict) => GetDictList(k3Dict, DefaultTransform)
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
+            );
+            list.Sort((a, b) => a.Key.CompareTo(b.Key));
+            var expected = KVList(
+                        (
+                            "a",
+                            KVList(
+                                (
+                                    1,
+                                    KVList(
+                                        (
+                                            false,
+                                            KVList(
+                                                (
+                                                    false,
+                                                    KVList(
+                                                        (false, KVList(
+                                                            (
+                                                                false,
+                                                                KVList((false, Lst(target![0])))
+                                                            )
+                                                        ))
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        (
+                            "b",
+                            KVList(
+                                (
+                                    1,
+                                    KVList(
+                                        (
+                                            true,
+                                            KVList(
+                                                (
+                                                    true,
+                                                    KVList((true, KVList(
+                                                        (
+                                                            true,
+                                                            KVList((true, Lst(target[1])))
+                                                        )
+                                                    )))
+                                                )
+                                            )
+                                        )
+                                    )
+                                ),
+                                (
+                                    2,
+                                    KVList(
+                                        (
+                                            false,
+                                            KVList(
+                                                (
+                                                    false,
+                                                    KVList((false, KVList(
+                                                        (
+                                                            false,
+                                                            KVList((false, Lst(target[2])))
+                                                        )
+                                                    )))
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        (
+                            "c",
+                            KVList(
+                                (
+                                    3,
+                                    KVList(
+                                        (
+                                            false,
+                                            KVList(
+                                                (
+                                                    false,
+                                                    KVList((false, KVList(
+                                                        (
+                                                            false,
+                                                            KVList((false, Lst(target[3])))
+                                                        )
+                                                    )))
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    );
+            list.Should()
+                .BeEquivalentTo(
+                    expected
                 );
         }
 

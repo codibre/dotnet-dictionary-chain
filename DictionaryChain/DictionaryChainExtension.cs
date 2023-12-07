@@ -5,6 +5,10 @@ namespace Codibre.DictionaryChain
 {
     public static class DictionaryChainExtension
     {
+        public static dynamic Chain<V>(Func<V, ulong> field, V v)  {
+            var dict = new Dictionary<ChainKeyType, V>();
+            return dict[field(v)];
+        }
         public static IDictionary<K0, List<V>> ToDictionaryChain<V, K0>(
             this IEnumerable<V> list,
             Func<V, K0> key0
@@ -225,5 +229,33 @@ namespace Codibre.DictionaryChain
                 DictionaryChainHelpers.ListStart<V>,
                 DictionaryChainHelpers.ListInc
             );
+        
+        public static IDictionary<ChainKeyType, ChainKeyValue<V>> ToDictionaryChain<V>(
+                this IEnumerable<V> list,
+                params Func<V, ChainKeyType>[] keys
+            )
+        {
+            
+            var result = new ChainedDictionary<V>();
+            foreach (var item in list)
+            {
+                var nextDict = result;
+                var last = keys.Length - 1;
+                for (var i = 0; i < last; i++)
+                {
+                    var k = keys[i](item);
+                    nextDict.TryGetValue(k, out ChainKeyValue<V> nextValue);
+                    if (nextValue == null)
+                    {
+                        nextValue = new ChainKeyValue<V>(new ChainedDictionary<V>());
+                    }
+
+                    nextDict = nextValue;
+                }
+                nextDict[keys[last](item)] = item;
+            }
+            return result;
+        }
     }
+
 }
