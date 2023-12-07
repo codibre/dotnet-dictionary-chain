@@ -1,3 +1,11 @@
+## [1.0.3](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.2...v1.0.3) (2023-12-07)
+
+
+### Bug Fixes
+
+* adding arbitrary DictionaryChain ([9a8195b](https://github.com/codibre/dotnet-dictionary-chain/commit/9a8195b973d0865962db482fde43025a31d6491a))
+* fixing namespace ([b3e1eea](https://github.com/codibre/dotnet-dictionary-chain/commit/b3e1eead900d200e85efb0ad35deaed268d8fc96))
+
 ## [1.0.2](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.1...v1.0.2) (2023-12-04)
 
 
