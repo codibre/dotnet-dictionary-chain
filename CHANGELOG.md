@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.3...v1.0.4) (2023-12-09)
+
+
+### Bug Fixes
+
+* fixing generic Chain creation ([0226465](https://github.com/codibre/dotnet-dictionary-chain/commit/0226465003db79fa9b4b5d1c4787988eaf258cc3))
+
 ## [1.0.3](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.2...v1.0.3) (2023-12-07)
 
 
