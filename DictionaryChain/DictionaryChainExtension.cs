@@ -230,7 +230,7 @@ namespace Codibre.DictionaryChain
                 DictionaryChainHelpers.ListInc
             );
         
-        public static IDictionary<ChainKeyType, ChainKeyValue<V>> ToDictionaryChain<V>(
+        public static ChainedDictionary<V> ToDictionaryChain<V>(
                 this IEnumerable<V> list,
                 params Func<V, ChainKeyType>[] keys
             )
@@ -248,6 +248,7 @@ namespace Codibre.DictionaryChain
                     if (nextValue == null)
                     {
                         nextValue = new ChainKeyValue<V>(new ChainedDictionary<V>());
+                        nextDict[k] = nextValue;
                     }
 
                     nextDict = nextValue;

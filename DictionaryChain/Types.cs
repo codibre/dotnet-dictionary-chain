@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Codibre.DictionaryChain
 {
     public class ChainKeyType {
-        private readonly object Value;
+        public readonly object Value;
 
         internal ChainKeyType(string value) {
             Value = value;
@@ -26,16 +26,18 @@ namespace Codibre.DictionaryChain
         }
 
         public override bool Equals(object obj)
-        {            
+        {
+            if (obj is ChainKeyType key) return Equals(key.Value);
             if (obj == null) return Value == null;
             if (Value.GetType() != obj.GetType()) return false;
-            return this.Value.Equals(obj);
+            return Value.Equals(obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Value.GetHashCode();
+            return Value.GetHashCode();
         }
+
         internal T GetValue<T>() {
             if (Value.GetType() == typeof(T)) return (T)Value;
             throw new FormatException();
@@ -57,7 +59,7 @@ namespace Codibre.DictionaryChain
     }
 
     public class ChainKeyValue<V> {
-        internal readonly object Value;
+        public readonly object Value;
 
         internal ChainKeyValue(ChainedDictionary<V> value) {
             Value = value;

@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 namespace Test
 {
     [TestClass]
@@ -328,7 +326,7 @@ namespace Test
         }
         
         [TestMethod]
-        public void Create_LevelN_Dictionary()
+        public void Create_LevelN7_Dictionary()
         {
             var result = target.ToDictionaryChain(
                 (x) => x.FieldString,
@@ -466,6 +464,151 @@ namespace Test
                 );
         }
 
+        [TestMethod]
+        public void Create_LevelN_Dictionary()
+        {
+            var result = target.ToDictionaryChain(
+                (x) => x.FieldString,
+                (x) => x.FieldInt,
+                (x) => x.FieldBool,
+                (x) => x.FieldBool,
+                (x) => x.FieldBool,
+                (x) => x.FieldBool,
+                (x) => x.FieldBool,
+                (x) => x.FieldBool
+            );
+
+            var list = MountChainList(result);
+            list.Sort((a, b) =>
+                ((string)((KeyValuePair<object, object>)a).Key).CompareTo(((KeyValuePair<object, object>)b).Key));
+            var expected = KVList(
+                        (
+                            "a",
+                            KVList(
+                                (
+                                    1,
+                                    KVList(
+                                        (
+                                            false,
+                                            KVList(
+                                                (
+                                                    false,
+                                                    KVList(
+                                                        (false, KVList(
+                                                            (
+                                                                false,
+                                                                KVList(
+                                                                    (
+                                                                        false,
+                                                                        KVList((false, Lst(target![0])))
+                                                                    )
+                                                                )
+                                                            )
+                                                        ))
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        (
+                            "b",
+                            KVList(
+                                (
+                                    1,
+                                    KVList(
+                                        (
+                                            true,
+                                            KVList(
+                                                (
+                                                    true,
+                                                    KVList((true, KVList(
+                                                        (
+                                                            true,
+                                                            KVList(
+                                                                (
+                                                                    true,
+                                                                    KVList((true, Lst(target![1])))
+                                                                )
+                                                            )
+                                                        )
+                                                    )))
+                                                )
+                                            )
+                                        )
+                                    )
+                                ),
+                                (
+                                    2,
+                                    KVList(
+                                        (
+                                            false,
+                                            KVList(
+                                                (
+                                                    false,
+                                                    KVList((false, KVList(
+                                                        (
+                                                            false,
+                                                            KVList(
+                                                                (
+                                                                    false,
+                                                                    KVList((false, Lst(target![2])))
+                                                                )
+                                                            )
+                                                        )
+                                                    )))
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        (
+                            "c",
+                            KVList(
+                                (
+                                    3,
+                                    KVList(
+                                        (
+                                            false,
+                                            KVList(
+                                                (
+                                                    false,
+                                                    KVList((false, KVList(
+                                                        (
+                                                            false,
+                                                            KVList(
+                                                                (
+                                                                    false,
+                                                                    KVList((false, Lst(target![3])))
+                                                                )
+                                                            )
+                                                        )
+                                                    )))
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    );
+            list.Should()
+                .BeEquivalentTo(
+                    expected
+                );
+        }
+
+        private static List<object> MountChainList(ChainKeyValue<Entity> x)
+        {
+            if (x.Value is ChainedDictionary<Entity> sub)
+                return sub.Select((x) => new KeyValuePair<object, object>(x.Key.Value, MountChainList(x.Value)) as object).ToList();
+            return new List<object>() { x.Value };
+        }
+
         private static List<V> Lst<V>(params V[] list) => list.ToList();
 
         private static List<KeyValuePair<K, V>> KVList<K, V>(params (K, V)[] list)
@@ -487,7 +630,7 @@ namespace Test
         {
             return new(x.Key, transformValue(x.Value));
         }
-
+        
         private static List<KeyValuePair<K, R>> GetDictList<K, V, R>(
             IDictionary<K, V> dict,
             Func<V, R> transformValue
