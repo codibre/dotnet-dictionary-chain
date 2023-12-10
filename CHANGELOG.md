@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.1.0...v1.1.1) (2023-12-10)
+
+
+### Bug Fixes
+
+* fixing MakeDictionary name ([6824db3](https://github.com/codibre/dotnet-dictionary-chain/commit/6824db30b40d82bc8703512884017f581a7c2193))
+
 # [1.1.0](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.4...v1.1.0) (2023-12-10)
 
 
