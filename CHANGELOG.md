@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.4...v1.1.0) (2023-12-10)
+
+
+### Features
+
+* allowing conversion of ChainedDictionary to Dictionary ([4c10a9a](https://github.com/codibre/dotnet-dictionary-chain/commit/4c10a9aaa88a7f7ce36fc6fc74aa5b6937057885))
+
 ## [1.0.4](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.0.3...v1.0.4) (2023-12-09)
 
 
