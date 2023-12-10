@@ -118,7 +118,7 @@ namespace Codibre.DictionaryChain
             }).ToDictionary(x => x.Key, x => x.Value)
             ) {}
 
-        public TDictionary makeDictionary<TDictionary>() where TDictionary : IDictionary {
+        public TDictionary MakeDictionary<TDictionary>() where TDictionary : IDictionary {
             var type = typeof(TDictionary);
             if (!type.IsClass) throw new FormatException("A concrete type must be used");
             var current = type;

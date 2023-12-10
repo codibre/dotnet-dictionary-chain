@@ -478,7 +478,7 @@ namespace Test
                 (x) => x.FieldBool,
                 (x) => x.FieldBool,
                 (x) => x.FieldBool
-            ).makeDictionary<MyDict>();
+            ).MakeDictionary<MyDict>();
 
             result["a"][1][false][false][false][false][false][false][0].Should()
                 .Be(target[0]);
