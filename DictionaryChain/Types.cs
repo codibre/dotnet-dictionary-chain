@@ -110,7 +110,7 @@ namespace Codibre.DictionaryChain
             : this(value.Select(x => {
                 ChainKeyValue<V> item;
                 if (x.Value is Dictionary<ChainKeyType, object> dict) item = new ChainedDictionary<V>(dict);
-                else if (x.Value is List<V> v) item = v;
+                else if (x.Value is V v) item = v;
                 else {
                     throw new FormatException("Not convertible");
                 }
@@ -173,12 +173,12 @@ namespace Codibre.DictionaryChain
     }
 
     public class ChainKeyValue<V> {
-        public readonly object Value;
+        public object Value { get; internal set; }
 
         internal ChainKeyValue(ChainedDictionary<V> value) {
             Value = value;
         }
-        internal ChainKeyValue(List<V> value) {
+        internal ChainKeyValue(V value) {
             Value = value;
         }
         public override bool Equals(object obj)
@@ -202,6 +202,6 @@ namespace Codibre.DictionaryChain
         }
         public static implicit operator V(ChainKeyValue<V> value) => (V)value.Value;
         public static implicit operator ChainKeyValue<V>(ChainedDictionary<V> value) => new ChainKeyValue<V>(value);
-        public static implicit operator ChainKeyValue<V>(List<V> value) => new ChainKeyValue<V>(value);
+        public static implicit operator ChainKeyValue<V>(V value) => new ChainKeyValue<V>(value);
     }
 }

@@ -240,5 +240,51 @@ namespace Codibre.DictionaryChain
                 startValue,
                 incValue
             );
+        
+        public static ChainedDictionary<TLeaf> ToDictionaryChain<V, TLeaf>(
+                this IEnumerable<V> list,
+                Func<TLeaf> startValue,
+                Func<TLeaf, V, TLeaf> incValue,
+                Func<V, ChainKeyType> key0,
+                Func<V, ChainKeyType> key1,
+                Func<V, ChainKeyType> key2,
+                Func<V, ChainKeyType> key3,
+                Func<V, ChainKeyType> key4,
+                Func<V, ChainKeyType> key5,
+                Func<V, ChainKeyType> key6,
+                params Func<V, ChainKeyType>[] keys
+            )
+        {
+            var allKeys = new List<Func<V, ChainKeyType>> {
+                key0, key1, key2, key3, key4, key5, key6,
+            };
+            foreach (var key in keys) {
+                allKeys.Add(key);
+            }
+            var result = new ChainedDictionary<TLeaf>();
+            foreach (var item in list)
+            {
+                var nextDict = result;
+                var last = allKeys.Count - 1;
+                for (var i = 0; i < last; i++)
+                {
+                    var k = allKeys[i](item);
+                    nextDict.TryGetValue(k, out var nextValue);
+                    if (nextValue == null)
+                    {
+                        nextValue = new ChainKeyValue<TLeaf>(new ChainedDictionary<TLeaf>());
+                        nextDict[k] = nextValue;
+                    }
+
+                    nextDict = nextValue;
+                }
+                if (!nextDict.TryGetValue(allKeys[last](item), out var itemList)) {
+                    nextDict[allKeys[last](item)] = itemList = startValue();
+                } 
+                
+                itemList.Value = incValue((TLeaf)itemList.Value, item);
+            }
+            return result;
+        }
     }
 }

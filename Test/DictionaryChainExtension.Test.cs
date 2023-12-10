@@ -49,7 +49,7 @@ namespace Test
         [TestMethod]
         public void Create_Level1_Dictionary()
         {
-            var result = target.ToDictionaryChain((x) => x.FieldString);
+            var result = target.ToDictionaryChain((x) => x.FieldString).MakeDictionary<IDictionary<string, List<Entity>>>();
 
             var list = GetDictList(result, DefaultTransform);
             list.Should()

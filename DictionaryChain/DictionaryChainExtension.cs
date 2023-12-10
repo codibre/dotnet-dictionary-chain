@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Codibre.DictionaryChain
@@ -12,51 +13,33 @@ namespace Codibre.DictionaryChain
         public static IDictionary<K0, List<V>> ToDictionaryChain<V, K0>(
             this IEnumerable<V> list,
             Func<V, K0> key0
-        )
-        {
-            return DictionaryChainHelpers.MountDictionary(
-                list,
-                (IDictionary<K0, List<V>> dict, V v) => (key0(v), dict),
+        ) => list.ToDictionaryChain(
                 DictionaryChainHelpers.ListStart<V>,
-                DictionaryChainHelpers.ListInc
-            );
-        }
+                DictionaryChainHelpers.ListInc, key0);
 
         public static IDictionary<K0, IDictionary<K1, List<V>>> ToDictionaryChain<V, K0, K1>(
             this IEnumerable<V> list,
             Func<V, K0> key0,
             Func<V, K1> key1
         ) =>
-            DictionaryChainHelpers.MountDictionary(
-                list,
-                (IDictionary<K0, IDictionary<K1, List<V>>> dict, V v) =>
-                {
-                    var (k0, k1) = (key0(v), key1(v));
-                    var leaftDict = DictionaryChainHelpers.GetNextLevel(k0, dict);
-                    return (k1, leaftDict);
-                },
+            list.ToDictionaryChain(
                 DictionaryChainHelpers.ListStart<V>,
-                DictionaryChainHelpers.ListInc
-            );
+                DictionaryChainHelpers.ListInc, key0, key1);
 
         public static IDictionary<K0, IDictionary<K1, IDictionary<K2, List<V>>>> ToDictionaryChain<
             V,
             K0,
             K1,
             K2
-        >(this IEnumerable<V> list, Func<V, K0> key0, Func<V, K1> key1, Func<V, K2> key2) =>
-            DictionaryChainHelpers.MountDictionary(
-                list,
-                (IDictionary<K0, IDictionary<K1, IDictionary<K2, List<V>>>> dict, V v) =>
-                {
-                    var (k0, k1, k2) = (key0(v), key1(v), key2(v));
-                    var k0Dict = DictionaryChainHelpers.GetNextLevel(k0, dict);
-                    var leaftDict = DictionaryChainHelpers.GetNextLevel(k1, k0Dict);
-                    return (k2, leaftDict);
-                },
+        >(
+            this IEnumerable<V> list,
+            Func<V, K0> key0,
+            Func<V, K1> key1,
+            Func<V, K2> key2
+        ) =>
+            list.ToDictionaryChain(
                 DictionaryChainHelpers.ListStart<V>,
-                DictionaryChainHelpers.ListInc
-            );
+                DictionaryChainHelpers.ListInc, key0, key1, key2);
 
         public static IDictionary<
             K0,
@@ -67,26 +50,9 @@ namespace Codibre.DictionaryChain
             Func<V, K1> key1,
             Func<V, K2> key2,
             Func<V, K3> key3
-        ) =>
-            DictionaryChainHelpers.MountDictionary(
-                list,
-                (
-                    IDictionary<
-                        K0,
-                        IDictionary<K1, IDictionary<K2, IDictionary<K3, List<V>>>>
-                    > dict,
-                    V v
-                ) =>
-                {
-                    var (k0, k1, k2, k3) = (key0(v), key1(v), key2(v), key3(v));
-                    var k0Dict = DictionaryChainHelpers.GetNextLevel(k0, dict);
-                    var k1Dict = DictionaryChainHelpers.GetNextLevel(k1, k0Dict);
-                    var leaftDict = DictionaryChainHelpers.GetNextLevel(k2, k1Dict);
-                    return (k3, leaftDict);
-                },
+        ) => list.ToDictionaryChain(
                 DictionaryChainHelpers.ListStart<V>,
-                DictionaryChainHelpers.ListInc
-            );
+                DictionaryChainHelpers.ListInc, key0, key1, key2, key3);
 
         public static IDictionary<
             K0,
@@ -98,27 +64,9 @@ namespace Codibre.DictionaryChain
             Func<V, K2> key2,
             Func<V, K3> key3,
             Func<V, K4> key4
-        ) =>
-            DictionaryChainHelpers.MountDictionary(
-                list,
-                (
-                    IDictionary<
-                        K0,
-                        IDictionary<K1, IDictionary<K2, IDictionary<K3, IDictionary<K4, List<V>>>>>
-                    > dict,
-                    V v
-                ) =>
-                {
-                    var (k0, k1, k2, k3, k4) = (key0(v), key1(v), key2(v), key3(v), key4(v));
-                    var k0Dict = DictionaryChainHelpers.GetNextLevel(k0, dict);
-                    var k1Dict = DictionaryChainHelpers.GetNextLevel(k1, k0Dict);
-                    var k2Dict = DictionaryChainHelpers.GetNextLevel(k2, k1Dict);
-                    var k3Dict = DictionaryChainHelpers.GetNextLevel(k3, k2Dict);
-                    return (k4, k3Dict);
-                },
+        ) => list.ToDictionaryChain(
                 DictionaryChainHelpers.ListStart<V>,
-                DictionaryChainHelpers.ListInc
-            );
+                DictionaryChainHelpers.ListInc, key0, key1, key2, key3, key4);
 
         public static IDictionary<
             K0,
@@ -134,41 +82,9 @@ namespace Codibre.DictionaryChain
             Func<V, K3> key3,
             Func<V, K4> key4,
             Func<V, K5> key5
-        ) =>
-            DictionaryChainHelpers.MountDictionary(
-                list,
-                (
-                    IDictionary<
-                        K0,
-                        IDictionary<
-                            K1,
-                            IDictionary<
-                                K2,
-                                IDictionary<K3, IDictionary<K4, IDictionary<K5, List<V>>>>
-                            >
-                        >
-                    > dict,
-                    V v
-                ) =>
-                {
-                    var (k0, k1, k2, k3, k4, k5) = (
-                        key0(v),
-                        key1(v),
-                        key2(v),
-                        key3(v),
-                        key4(v),
-                        key5(v)
-                    );
-                    var k0Dict = DictionaryChainHelpers.GetNextLevel(k0, dict);
-                    var k1Dict = DictionaryChainHelpers.GetNextLevel(k1, k0Dict);
-                    var k2Dict = DictionaryChainHelpers.GetNextLevel(k2, k1Dict);
-                    var k3Dict = DictionaryChainHelpers.GetNextLevel(k3, k2Dict);
-                    var k4Dict = DictionaryChainHelpers.GetNextLevel(k4, k3Dict);
-                    return (k5, k4Dict);
-                },
+        ) => list.ToDictionaryChain(
                 DictionaryChainHelpers.ListStart<V>,
-                DictionaryChainHelpers.ListInc
-            );
+                DictionaryChainHelpers.ListInc, key0, key1, key2, key3, key4, key5);
 
         public static IDictionary<
             K0,
@@ -188,77 +104,29 @@ namespace Codibre.DictionaryChain
             Func<V, K4> key4,
             Func<V, K5> key5,
             Func<V, K6> key6
-        ) =>
-            DictionaryChainHelpers.MountDictionary(
-                list,
-                (
-                    // TODO: Refactor this and all chained Dictionary types after the release of generic type parameter alias https://github.com/dotnet/csharplang/issues/1239
-                    IDictionary<
-                        K0,
-                        IDictionary<
-                            K1,
-                            IDictionary<
-                                K2,
-                                IDictionary<
-                                    K3,
-                                    IDictionary<K4, IDictionary<K5, IDictionary<K6, List<V>>>>
-                                >
-                            >
-                        >
-                    > dict,
-                    V v
-                ) =>
-                {
-                    var (k0, k1, k2, k3, k4, k5, k6) = (
-                        key0(v),
-                        key1(v),
-                        key2(v),
-                        key3(v),
-                        key4(v),
-                        key5(v),
-                        key6(v)
-                    );
-                    var k0Dict = DictionaryChainHelpers.GetNextLevel(k0, dict);
-                    var k1Dict = DictionaryChainHelpers.GetNextLevel(k1, k0Dict);
-                    var k2Dict = DictionaryChainHelpers.GetNextLevel(k2, k1Dict);
-                    var k3Dict = DictionaryChainHelpers.GetNextLevel(k3, k2Dict);
-                    var k4Dict = DictionaryChainHelpers.GetNextLevel(k4, k3Dict);
-                    var k5Dict = DictionaryChainHelpers.GetNextLevel(k5, k4Dict);
-                    return (k6, k5Dict);
-                },
+        ) => list.ToDictionaryChain(
                 DictionaryChainHelpers.ListStart<V>,
-                DictionaryChainHelpers.ListInc
-            );
-        
-        public static ChainedDictionary<V> ToDictionaryChain<V>(
-                this IEnumerable<V> list,
-                params Func<V, ChainKeyType>[] keys
-            )
-        {
-            
-            var result = new ChainedDictionary<V>();
-            foreach (var item in list)
-            {
-                var nextDict = result;
-                var last = keys.Length - 1;
-                for (var i = 0; i < last; i++)
-                {
-                    var k = keys[i](item);
-                    nextDict.TryGetValue(k, out ChainKeyValue<V> nextValue);
-                    if (nextValue == null)
-                    {
-                        nextValue = new ChainKeyValue<V>(new ChainedDictionary<V>());
-                        nextDict[k] = nextValue;
-                    }
+                DictionaryChainHelpers.ListInc, key0, key1, key2, key3, key4, key5, key6);
 
-                    nextDict = nextValue;
-                }
-                if (!nextDict.TryGetValue(keys[last](item), out var itemList)) {
-                    nextDict[keys[last](item)] = itemList = new List<V>();
-                } 
-                ((List<V>)itemList.Value).Add(item);
-            }
-            return result;
+        public static ChainedDictionary<List<V>> ToDictionaryChain<V>(
+                this IEnumerable<V> list,
+                Func<V, ChainKeyType> key0,
+                Func<V, ChainKeyType> key1,
+                Func<V, ChainKeyType> key2,
+                Func<V, ChainKeyType> key3,
+                Func<V, ChainKeyType> key4,
+                Func<V, ChainKeyType> key5,
+                Func<V, ChainKeyType> key6,
+                params Func<V, ChainKeyType>[] keys
+            ) => list.ToDictionaryChain(() => new List<V>(), (leaf, item) =>
+            {
+                leaf.Add(item);
+                return leaf;
+            }, key0, key1, key2, key3, key4, key5, key6, keys);
+
+        public static TDictionary MakeDictionary<TDictionary>(this IEnumerable dict) {
+            if (dict is TDictionary tDict) return tDict;
+            throw new FormatException("Not convertible");
         }
     }
 
