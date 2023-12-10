@@ -253,7 +253,10 @@ namespace Codibre.DictionaryChain
 
                     nextDict = nextValue;
                 }
-                nextDict[keys[last](item)] = item;
+                if (!nextDict.TryGetValue(keys[last](item), out var itemList)) {
+                    nextDict[keys[last](item)] = itemList = new List<V>();
+                } 
+                ((List<V>)itemList.Value).Add(item);
             }
             return result;
         }

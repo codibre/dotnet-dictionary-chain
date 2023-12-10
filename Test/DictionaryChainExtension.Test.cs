@@ -9,6 +9,8 @@ namespace Test
             public bool FieldBool;
             public string FieldString;
         }
+        
+        class MyDict : Dictionary<string, Dictionary<int, Dictionary<bool, Dictionary<bool, Dictionary<bool, Dictionary<bool, Dictionary<bool, Dictionary<bool, List<Entity>>>>>>>>>{};
 
         List<Entity>? target;
 
@@ -463,9 +465,9 @@ namespace Test
                     expected
                 );
         }
-
+        
         [TestMethod]
-        public void Create_LevelN_Dictionary()
+        public void Create_LevelN_Dictionary_TypeCast()
         {
             var result = target.ToDictionaryChain(
                 (x) => x.FieldString,
@@ -476,130 +478,16 @@ namespace Test
                 (x) => x.FieldBool,
                 (x) => x.FieldBool,
                 (x) => x.FieldBool
-            );
+            ).makeDictionary<MyDict>();
 
-            var list = MountChainList(result);
-            list.Sort((a, b) =>
-                ((string)((KeyValuePair<object, object>)a).Key).CompareTo(((KeyValuePair<object, object>)b).Key));
-            var expected = KVList(
-                        (
-                            "a",
-                            KVList(
-                                (
-                                    1,
-                                    KVList(
-                                        (
-                                            false,
-                                            KVList(
-                                                (
-                                                    false,
-                                                    KVList(
-                                                        (false, KVList(
-                                                            (
-                                                                false,
-                                                                KVList(
-                                                                    (
-                                                                        false,
-                                                                        KVList((false, Lst(target![0])))
-                                                                    )
-                                                                )
-                                                            )
-                                                        ))
-                                                    )
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        (
-                            "b",
-                            KVList(
-                                (
-                                    1,
-                                    KVList(
-                                        (
-                                            true,
-                                            KVList(
-                                                (
-                                                    true,
-                                                    KVList((true, KVList(
-                                                        (
-                                                            true,
-                                                            KVList(
-                                                                (
-                                                                    true,
-                                                                    KVList((true, Lst(target![1])))
-                                                                )
-                                                            )
-                                                        )
-                                                    )))
-                                                )
-                                            )
-                                        )
-                                    )
-                                ),
-                                (
-                                    2,
-                                    KVList(
-                                        (
-                                            false,
-                                            KVList(
-                                                (
-                                                    false,
-                                                    KVList((false, KVList(
-                                                        (
-                                                            false,
-                                                            KVList(
-                                                                (
-                                                                    false,
-                                                                    KVList((false, Lst(target![2])))
-                                                                )
-                                                            )
-                                                        )
-                                                    )))
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        (
-                            "c",
-                            KVList(
-                                (
-                                    3,
-                                    KVList(
-                                        (
-                                            false,
-                                            KVList(
-                                                (
-                                                    false,
-                                                    KVList((false, KVList(
-                                                        (
-                                                            false,
-                                                            KVList(
-                                                                (
-                                                                    false,
-                                                                    KVList((false, Lst(target![3])))
-                                                                )
-                                                            )
-                                                        )
-                                                    )))
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    );
-            list.Should()
-                .BeEquivalentTo(
-                    expected
-                );
+            result["a"][1][false][false][false][false][false][false][0].Should()
+                .Be(target[0]);
+            result["b"][1][true][true][true][true][true][true][0].Should()
+                .Be(target[1]);
+            result["b"][2][false][false][false][false][false][false][0].Should()
+                .Be(target[2]);
+            result["c"][3][false][false][false][false][false][false][0].Should()
+                .Be(target[3]);
         }
 
         private static List<object> MountChainList(ChainKeyValue<Entity> x)
