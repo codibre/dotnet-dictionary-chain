@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.1.1...v1.1.2) (2023-12-10)
+
+
+### Bug Fixes
+
+* fixing signatures and creating generic toDictionaryChain with start and inc value ([09489b9](https://github.com/codibre/dotnet-dictionary-chain/commit/09489b9e7db73d941566020546df109b8fe9c76b))
+
 ## [1.1.1](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.1.0...v1.1.1) (2023-12-10)
 
 
