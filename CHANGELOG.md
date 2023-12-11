@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.1.5...v1.1.6) (2023-12-11)
+
+
+### Bug Fixes
+
+* publishing repository url ([d201c0f](https://github.com/codibre/dotnet-dictionary-chain/commit/d201c0fd80167628c053c68050a73d15adcd193b))
+
 ## [1.1.5](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.1.4...v1.1.5) (2023-12-11)
 
 
