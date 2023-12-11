@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.1.9...v1.1.10) (2023-12-11)
+
+
+### Bug Fixes
+
+* fixing test coverage ([833c74c](https://github.com/codibre/dotnet-dictionary-chain/commit/833c74cd412b9a493ed6cb6d67d99453f187c70c))
+
 ## [1.1.9](https://github.com/codibre/dotnet-dictionary-chain/compare/v1.1.8...v1.1.9) (2023-12-11)
 
 
