@@ -27,4 +27,4 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info
-          coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
+          coverageLocations: ${{github.workspace}}/Test/coverage/lcov.info:lcov
