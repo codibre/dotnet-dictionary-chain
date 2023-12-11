@@ -32,18 +32,19 @@ struct Person {
 }
 ```
 
-If so, you build a chain of dictionaries using the field **country**, **state** and **city**
+If so, you may build a chain of dictionaries using the field **country**, **state** and **city**
 
 ```c#
 var chain = list.ToDictionaryChain(x => x.Country, x => x.State, x => x.City);
 ```
 
 The object chain will have a type like this:
+
 ```c#
 IDictionary<string, IDictionary<string, IDictionary<string, List<Person>>>
 ```
 
-So, if you want to find every lited person that lives in the country **US**, state of **Florida**, in the city of **Tallahassee**, you just have to do:
+So, if you want to find every listed person that lives in the country **US**, state of **Florida**, in the city of **Tallahassee**, you just have to do:
 
 ```c#
 var persons = chain['US']['Florida']['Tallahassee'];
@@ -52,9 +53,11 @@ var persons = chain['US']['Florida']['Tallahassee'];
 Or 
 
 ```c#
-if (!chain.TryGetValue('US', out var stateChain)) return null;
-if (!stateChain.TryGetValue('US', out var cityChain)) return null;
-if (!cityChain.TryGetValue('US', out var persons)) return null;
+if (!chain.TryGetValue('US', out var stateChain)
+ || !stateChain.TryGetValue('US', out var cityChain)
+ || !cityChain.TryGetValue('US', out var persons)
+) return null;
+
 return persons;
 ```
 
@@ -73,7 +76,7 @@ That way, each leaf will have the number of people in each city with a name star
 
 ## Limitation
 
-This package, for now, can only infer a strong chain of Dictionary types up to depth 7, which we hope will be enough for most cases. If you need more thant that, though, the result object will be an instance of **ChainedDictionary**. If you use it directly, you'll need to do some type checking at each level to check wether it is another level, or already the leaf, as this object doesn't have the type of every level strongly defined. The best way to deal with this situation is to use the method **MakeDictionary**, just after creating it, like this:
+This package, for now, can only infer a strong chain of Dictionary types up to depth 7, which we hope will be enough for most cases. If you need more thant that, though, the result object will be an instance of **ChainedDictionary**. If you use it directly, you'll need to do some type checking at each level to check (or cast) wether it is another level, or already the leaf, as this object doesn't have the type of every level strongly defined. The best way to deal with this situation is to use the method **MakeDictionary**, just after creating it, like this:
 
 ```c#
 var chain list.ToDictionary(
@@ -100,8 +103,8 @@ var chain list.ToDictionary(
 >>>()
 ```
 
-MakeDictionary will do some reflection operations to convert the ChainedDictionary into the an instance of the chain of Dictionaries provided as type argument. It does have an overload so, the idea is not to use it every time, but to load it in memory once, then letting it being memoized for some time, to avoid repeating the operation and optimizing the query.
-Does it look good? No, it does not, but it is the better we could do with the current C# design.
+MakeDictionary will do some reflection operations to convert the ChainedDictionary into an instance of the chain of Dictionaries provided as type argument. It does have an overload so, the idea is not to use it every time, but to load it in memory once, then letting it being memoized for some time, to avoid repeating the operation and optimizing the query.
+Does it look good? No, it does not, but it is the better we could do with the current C# design, and it'll still speed up your application!
 
 ## License
 
