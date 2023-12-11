@@ -6,6 +6,14 @@ using System.Reflection;
 
 namespace Codibre.DictionaryChain
 {
+    /// <summary>
+    /// ChainKeyType offers the possibility to have three different type of
+    /// keys in a ChainedDictionary: numeric, text, or boolean.
+    /// It's a workaround for the lack of union type on C#. It limits the
+    /// possibilities of types for keys, but it covers the most common needs.
+    /// Also, a ChainedDictionary will only be used for Chains of Dictionaries
+    /// with depth equals to 8 or over
+    /// </summary>
     public class ChainKeyType {
         public readonly object Value;
 
@@ -95,6 +103,11 @@ namespace Codibre.DictionaryChain
         internal static readonly Type baseType = typeof(object);
     }
 
+    /// <summary>
+    /// A Class used for a Generic Chain of Dictionaries, with unknown depth.
+    /// Only used for Chain of Dictionaries with depth 8 or over
+    /// </summary>
+    /// <typeparam name="V"></typeparam>
     public class ChainedDictionary<V> : Dictionary<ChainKeyType, ChainKeyValue<V>> {
 
         public ChainedDictionary() : base() {}
@@ -118,6 +131,13 @@ namespace Codibre.DictionaryChain
             }).ToDictionary(x => x.Key, x => x.Value)
             ) {}
 
+        /// <summary>
+        /// Converts a ChainedDictionary in the specified Chain Of Dictionaries.
+        /// this methods fails if the instance provided is not compatible with
+        /// the ChainedDictionary keys and values
+        /// </summary>
+        /// <typeparam name="TDictionary">The Target type to be obtained</typeparam>
+        /// <exception cref="FormatException"></exception>
         public TDictionary MakeDictionary<TDictionary>() where TDictionary : IDictionary {
             var type = typeof(TDictionary);
             if (!type.IsClass) throw new FormatException("A concrete type must be used");
@@ -171,7 +191,15 @@ namespace Codibre.DictionaryChain
             return result;
         }
     }
-
+    /// <summary>
+    /// ChainKeyValue offers the possibility to have flexible values
+    /// in a generic ChainedDictionary, that can be either the leaf or
+    /// a new ChainedDictionary.
+    /// It's a workaround for the lack of union type on C#. It limits the
+    /// possibilities of types for keys, but it covers the most common needs.
+    /// Also, a ChainedDictionary will only be used for Chains of Dictionaries
+    /// with depth equals to 8 or over
+    /// </summary>
     public class ChainKeyValue<V> {
         public object Value { get; internal set; }
 

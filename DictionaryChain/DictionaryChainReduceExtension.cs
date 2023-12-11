@@ -5,6 +5,16 @@ namespace Codibre.DictionaryChain
 {
     public static class DictionaryChainReduceExtension
     {
+        /// <summary>
+        /// Generate a chain of Dictionaries of depth 1.
+        /// The leaf will have the type defined by the startValue function
+        /// </summary>
+        /// <typeparam name="V">The item type of the enumerable to be traversed</typeparam>
+        /// <param name="list">The enumerable to be traversed</param>
+        /// <param name="startValue">A function to initialize the leaf value</param>
+        /// <param name="incValue">A function to increment each leaf value</param>
+        /// <param name="key0">A function to return the value of the first key. It must return a number, a boolean value, or a string</param>
+        /// <returns>The Chained Dictionary instance</returns>
         public static IDictionary<K0, TLeaf> ToDictionaryChain<V, TLeaf, K0>(
             this IEnumerable<V> list,
             Func<TLeaf> startValue,
@@ -18,6 +28,17 @@ namespace Codibre.DictionaryChain
                 incValue
             );
 
+        /// <summary>
+        /// Generate a chain of Dictionaries of depth 2.
+        /// The leaf will have the type defined by the startValue function
+        /// </summary>
+        /// <typeparam name="V">The item type of the enumerable to be traversed</typeparam>
+        /// <param name="list">The enumerable to be traversed</param>
+        /// <param name="startValue">A function to initialize the leaf value</param>
+        /// <param name="incValue">A function to increment each leaf value</param>
+        /// <param name="key0">A function to return the value of the first key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key1">A function to return the value of the second key. It must return a number, a boolean value, or a string</param>
+        /// <returns>The Chained Dictionary instance</returns>
         public static IDictionary<K0, IDictionary<K1, TLeaf>> ToDictionaryChain<V, TLeaf, K0, K1>(
             this IEnumerable<V> list,
             Func<TLeaf> startValue,
@@ -37,6 +58,18 @@ namespace Codibre.DictionaryChain
                 incValue
             );
 
+        /// <summary>
+        /// Generate a chain of Dictionaries of depth 3.
+        /// The leaf will have the type defined by the startValue function
+        /// </summary>
+        /// <typeparam name="V">The item type of the enumerable to be traversed</typeparam>
+        /// <param name="list">The enumerable to be traversed</param>
+        /// <param name="startValue">A function to initialize the leaf value</param>
+        /// <param name="incValue">A function to increment each leaf value</param>
+        /// <param name="key0">A function to return the value of the first key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key1">A function to return the value of the second key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key2">A function to return the value of the third key. It must return a number, a boolean value, or a string</param>
+        /// <returns>The Chained Dictionary instance</returns>
         public static IDictionary<K0, IDictionary<K1, IDictionary<K2, TLeaf>>> ToDictionaryChain<
             V,
             TLeaf,
@@ -64,6 +97,19 @@ namespace Codibre.DictionaryChain
                 incValue
             );
 
+        /// <summary>
+        /// Generate a chain of Dictionaries of depth 4.
+        /// The leaf will have the type defined by the startValue function
+        /// </summary>
+        /// <typeparam name="V">The item type of the enumerable to be traversed</typeparam>
+        /// <param name="list">The enumerable to be traversed</param>
+        /// <param name="startValue">A function to initialize the leaf value</param>
+        /// <param name="incValue">A function to increment each leaf value</param>
+        /// <param name="key0">A function to return the value of the first key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key1">A function to return the value of the second key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key2">A function to return the value of the third key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key3">A function to return the value of the fourth key. It must return a number, a boolean value, or a string</param>
+        /// <returns>The Chained Dictionary instance</returns>
         public static IDictionary<
             K0,
             IDictionary<K1, IDictionary<K2, IDictionary<K3, TLeaf>>>
@@ -93,6 +139,20 @@ namespace Codibre.DictionaryChain
                 incValue
             );
 
+        /// <summary>
+        /// Generate a chain of Dictionaries of depth 5.
+        /// The leaf will have the type defined by the startValue function
+        /// </summary>
+        /// <typeparam name="V">The item type of the enumerable to be traversed</typeparam>
+        /// <param name="list">The enumerable to be traversed</param>
+        /// <param name="startValue">A function to initialize the leaf value</param>
+        /// <param name="incValue">A function to increment each leaf value</param>
+        /// <param name="key0">A function to return the value of the first key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key1">A function to return the value of the second key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key2">A function to return the value of the third key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key3">A function to return the value of the fourth key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key4">A function to return the value of the fifth key. It must return a number, a boolean value, or a string</param>
+        /// <returns>The Chained Dictionary instance</returns>
         public static IDictionary<
             K0,
             IDictionary<K1, IDictionary<K2, IDictionary<K3, IDictionary<K4, TLeaf>>>>
@@ -127,6 +187,21 @@ namespace Codibre.DictionaryChain
                 incValue
             );
 
+        /// <summary>
+        /// Generate a chain of Dictionaries of depth 6.
+        /// The leaf will have the type defined by the startValue function
+        /// </summary>
+        /// <typeparam name="V">The item type of the enumerable to be traversed</typeparam>
+        /// <param name="list">The enumerable to be traversed</param>
+        /// <param name="startValue">A function to initialize the leaf value</param>
+        /// <param name="incValue">A function to increment each leaf value</param>
+        /// <param name="key0">A function to return the value of the first key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key1">A function to return the value of the second key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key2">A function to return the value of the third key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key3">A function to return the value of the fourth key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key4">A function to return the value of the fifth key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key5">A function to return the value of the sixth key. It must return a number, a boolean value, or a string</param>
+        /// <returns>The Chained Dictionary instance</returns>
         public static IDictionary<
             K0,
             IDictionary<
@@ -179,6 +254,22 @@ namespace Codibre.DictionaryChain
                 incValue
             );
 
+        /// <summary>
+        /// Generate a chain of Dictionaries of depth 7.
+        /// The leaf will have the type defined by the startValue function
+        /// </summary>
+        /// <typeparam name="V">The item type of the enumerable to be traversed</typeparam>
+        /// <param name="list">The enumerable to be traversed</param>
+        /// <param name="startValue">A function to initialize the leaf value</param>
+        /// <param name="incValue">A function to increment each leaf value</param>
+        /// <param name="key0">A function to return the value of the first key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key1">A function to return the value of the second key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key2">A function to return the value of the third key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key3">A function to return the value of the fourth key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key4">A function to return the value of the fifth key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key5">A function to return the value of the sixth key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key6">A function to return the value of the seventh key. It must return a number, a boolean value, or a string</param>
+        /// <returns>The Chained Dictionary instance</returns>
         public static IDictionary<
             K0,
             IDictionary<
@@ -241,6 +332,25 @@ namespace Codibre.DictionaryChain
                 incValue
             );
         
+        /// <summary>
+        /// Generate a Generic instance of ChainedDictionary.
+        /// To be easily used, is important to call MakeDictionary
+        /// to convert it to a Custom Chain of Dictionaries
+        /// The leaf will have the type defined by the startValue function
+        /// </summary>
+        /// <typeparam name="V">The item type of the enumerable to be traversed</typeparam>
+        /// <param name="list">The enumerable to be traversed</param>
+        /// <param name="startValue">A function to initialize the leaf value</param>
+        /// <param name="incValue">A function to increment each leaf value</param>
+        /// <param name="key0">A function to return the value of the first key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key1">A function to return the value of the second key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key2">A function to return the value of the third key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key3">A function to return the value of the fourth key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key4">A function to return the value of the fifth key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key5">A function to return the value of the sixth key. It must return a number, a boolean value, or a string</param>
+        /// <param name="key6">A function to return the value of the seventh key. It must return a number, a boolean value, or a string</param>
+        /// <param name="keys">A list of functions to return the value of the rest of the key. Each one must return a number, a boolean value, or a string</param>
+        /// <returns>The Chained Dictionary instance</returns>
         public static ChainedDictionary<TLeaf> ToDictionaryChain<V, TLeaf>(
                 this IEnumerable<V> list,
                 Func<TLeaf> startValue,
