@@ -5,7 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-    <RepositoryUrl>https://github.com/codibre/dotnet-dictionary-chain</RepositoryUrl> 
+    <RepositoryUrl>https://github.com/codibre/dotnet-dictionary-chain.git</RepositoryUrl> 
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PrivateRepositoryUrl>https://github.com/codibre/dotnet-dictionary-chain</PrivateRepositoryUrl>
     <RepositoryType>git</RepositoryType> 
   </PropertyGroup>
 
