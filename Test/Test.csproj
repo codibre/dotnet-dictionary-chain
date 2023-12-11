@@ -4,11 +4,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <RepositoryUrl>https://github.com/codibre/dotnet-dictionary-chain.git</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PrivateRepositoryUrl>https://github.com/codibre/dotnet-dictionary-chain</PrivateRepositoryUrl>
-    <RepositoryType>git</RepositoryType> 
   </PropertyGroup>
 
   <ItemGroup>
