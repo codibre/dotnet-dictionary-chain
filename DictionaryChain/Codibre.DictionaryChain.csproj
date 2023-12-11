@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageTags>Dictionary;Tree;Chain;constantTime</PackageTags>
+    <IsPackable>true</IsPackable>
+    <RepositoryUrl>https://github.com/codibre/dotnet-dictionary-chain.git</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
