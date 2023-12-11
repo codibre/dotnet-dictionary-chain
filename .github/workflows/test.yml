@@ -26,5 +26,5 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: sh run-coverage.sh
-          coverageLocations: ${{github.workspace}}/coverage/coverage.cobertura.xml:cobertura
+          coverageCommand: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info
+          coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov

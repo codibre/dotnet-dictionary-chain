@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.msbuild" Version="6.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="FluentAssertions" Version="6.12.0" developmentDependency="true" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" developmentDependency="true" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" developmentDependency="true" />

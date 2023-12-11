@@ -76,7 +76,7 @@ That way, each leaf will have the number of people in each city with a name star
 
 ## Limitation
 
-This package, for now, can only infer a strong chain of Dictionary types up to depth 7, which we hope will be enough for most cases. If you need more thant that, though, the result object will be an instance of **ChainedDictionary**. If you use it directly, you'll need to do some type checking at each level to check (or cast) wether it is another level, or already the leaf, as this object doesn't have the type of every level strongly defined. The best way to deal with this situation is to use the method **MakeDictionary**, just after creating it, like this:
+This package, for now, can only infer a strong chain of Dictionary types up to depth 7, which we hope will be enough for most cases. If you need more than that, though, the result object will be an instance of **ChainedDictionary**. If you use it directly, you'll need to do some type checking at each level to check (or cast) wether it is another level, or already the leaf, as this object doesn't have the type of every level strongly defined. The best way to deal with this situation is to use the method **MakeDictionary**, just after creating it, like this:
 
 ```c#
 var chain list.ToDictionary(
