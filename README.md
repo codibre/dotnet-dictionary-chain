@@ -9,7 +9,7 @@ DictionaryChain extension for any .net project
 
 ## Why
 
-Some highly accessed lists can benefit from a chained dictionary structure. Let's say you have three fields where you apply a equality comparison to choose between the items of the list. This operation, unless you do a binary search, will have a processing complexity of O(N). However, if you create a instance of chained dictionaries with depth 3, where the keys for each level are the values for each field, you can have the same result in O(1), as long as you have stablished uniqueness for the fields used to build this instance. If not, you can have a list with every list item that matches that path, and now you'll have to traverse much fewer items than before, as the items are distributed between the nodes!
+Some highly accessed lists can benefit from a chained dictionary structure. Let's say you have three fields where you apply a equality comparison to choose between the items of the list. This operation, unless you do a binary search, will have a processing complexity of O(N). However, if you create an instance of chained dictionaries with depth 3, where the keys for each level are the values for each field, you can have the same result in O(1), as long as you have stablished uniqueness for the fields used to build this instance. If not, you can have a list with every list item that matches that path, and now you'll have to traverse much fewer items than before, as the items are distributed between the nodes!
 
 Long story short, you can better the performance of you application by caching those chained dictionaries on strategic points, making much less list traversals throughout your application execution!
 
@@ -54,8 +54,8 @@ Or
 
 ```c#
 if (!chain.TryGetValue('US', out var stateChain)
- || !stateChain.TryGetValue('US', out var cityChain)
- || !cityChain.TryGetValue('US', out var persons)
+ || !stateChain.TryGetValue('Florida', out var cityChain)
+ || !cityChain.TryGetValue('Tallahassee', out var persons)
 ) return null;
 
 return persons;
